@@ -8,6 +8,7 @@ var express = require('express'),
 /**
  * configure modules
  */
+app.use(express.static('view'));
 app.use('/convert', require('./controller/index.js'));
 
 /**

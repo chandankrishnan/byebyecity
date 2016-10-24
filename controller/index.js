@@ -6,7 +6,7 @@ var express = require('express'),
     fs = require('fs'),
     convert = require('../model/convert.js');
 
-router.get('/get/csv/file', function (req, res) {
+router.get('/', function (req, res) {
     console.log('inside get')
     fs.readdir('./File', (err, files) => {
         console.log(files)

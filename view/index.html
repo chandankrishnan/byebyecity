@@ -1,14 +1,33 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="myApp">
+
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 </head>
+
 <body ng-controller="myCtrl">
-    <li ng-repeat="file"></li>
+    <li ng-repeat="i in file">{{i}}</li>
 </body>
 <script>
-
+angular.module("myApp",[]).controller("myCtrl","Callfunct");
+function callfunct($scope,$http){
+    $scope onLoad=function(){
+        $http.get('https://byecry.herokuapp.com/convert/get/csv/file').success(function (data,status) {     
+           if(status==200){
+            $scope.file=data;
+            }
+         else{
+           $scope.loading=false;
+           alert("wrong info");
+         }
+    }).catch(function (data) {
+      $scope.loading=false;
+      alert("internal server error");
+});
+    }
+}
 </script>
+
 </html>
