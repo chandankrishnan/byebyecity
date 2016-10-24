@@ -5,18 +5,36 @@
     <meta charset="UTF-8">
     <title>Document</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 
 <body ng-controller="myCtrl">
-    <li ng-repeat="i in file">{{i}}</li>
+    <div class="button">
+        <ul>
+            <button class="btn-link" ng-click="show(dum.button0)" ng-bind="dum.button0"></button><br/>
+            <button class="btn-link" ng-click="show(dum.button1)" ng-bind="dum.button1"></button><br/>
+            <button class="btn-link" ng-click="show(dum.button2)" ng-bind="dum.button2"></button><br/>
+            <button class="btn-link" ng-click="show(dum.button3)" ng-bind="dum.button3"></button><br/>
+        </ul>
+    </div>
+    <div class="display" ng-bind="display">
+    </div>
 </body>
 <script>
-angular.module("myApp",[]).controller("myCtrl","Callfunct");
-function callfunct($scope,$http){
-    $scope onLoad=function(){
-        $http.get('https://byecry.herokuapp.com/convert/get/csv/file').success(function (data,status) {     
+angular.module("myApp",[]).controller("myCtrl",function($scope,$http){
+    $scope.dum = {
+        button0 : 'https://s3.amazonaws.com/ed-college-choice-public/Most+Recent+Cohorts+(Scorecard+Elements).csv',
+        button1 : 'http://www.sample-videos.com/csv/Sample-Spreadsheet-10-rows.csv',
+        button2 : 'http://www.sample-videos.com/csv/Sample-Spreadsheet-100-rows.csv',
+        button3 : 'http://sample-file.bazadanni.com/download/txt/json/sample.json'
+    }
+    console.log($scope.dum);
+    $scope.show = function(val){
+        console.log(val);
+        $http.post('http://localhost:3004/convert/csv/to/json?q='+val).success(function (data,status) {     
            if(status==200){
-            $scope.file=data;
+            console.log(data)
+            $scope.display=JSON.stringify(data);
             }
          else{
            $scope.loading=false;
@@ -25,9 +43,11 @@ function callfunct($scope,$http){
     }).catch(function (data) {
       $scope.loading=false;
       alert("internal server error");
-});
+    });
     }
-}
+});
+    
+
 </script>
 
 </html>
