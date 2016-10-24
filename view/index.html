@@ -31,7 +31,7 @@ angular.module("myApp",[]).controller("myCtrl",function($scope,$http){
     console.log($scope.dum);
     $scope.show = function(val){
         console.log(val);
-        $http.post('http://localhost:3004/convert/csv/to/json?q='+val).success(function (data,status) {     
+        $http.post('https://byecry.herokuapp.com/convert/csv/to/json?q='+val).success(function (data,status) {     
            if(status==200){
             console.log(data)
             $scope.display=JSON.stringify(data);
