@@ -33,6 +33,7 @@ angular.module("myApp",[]).controller("myCtrl",function($scope,$http){
     console.log($scope.dum);
     $scope.show = function(link){
         $scope.loading = true;
+        $scope.display="";
         console.log($scope.loading);
         $http.post('https://byecry.herokuapp.com/convert/csv/to/json?q='+link).success(function (data,status) {     
            if(status==200){
