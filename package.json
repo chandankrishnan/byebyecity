@@ -7,7 +7,6 @@
     "body-parser": "^1.15.2",
     "csvtojson": "^1.0.3",
     "express": "^4.14.0",
-    "fs": "0.0.1-security",
     "request": "^2.75.0"
   },
   "devDependencies": {},
