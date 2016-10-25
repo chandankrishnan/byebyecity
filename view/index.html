@@ -19,9 +19,11 @@
     </div>
     <div class="display" ng-bind="display">
     </div>
+    <center><img id="mySpinner" src="gears.gif" ng-show="loading" style="margin-top:200px"/></center>
 </body>
 <script>
 angular.module("myApp",[]).controller("myCtrl",function($scope,$http){
+    
     $scope.dum = {
         button0 : 'https://s3.amazonaws.com/ed-college-choice-public/Most+Recent+Cohorts+(Scorecard+Elements).csv',
         button1 : 'http://www.sample-videos.com/csv/Sample-Spreadsheet-10-rows.csv',
@@ -29,19 +31,20 @@ angular.module("myApp",[]).controller("myCtrl",function($scope,$http){
         button3 : 'http://sample-file.bazadanni.com/download/txt/json/sample.json'
     }
     console.log($scope.dum);
-    $scope.show = function(val){
-        console.log(val);
-        $http.post('https://byecry.herokuapp.com/convert/csv/to/json?q='+val).success(function (data,status) {     
+    $scope.show = function(link){
+        $scope.loading = true;
+        console.log($scope.loading);
+        $http.post('https://byecry.herokuapp.com/convert/csv/to/json?q='+link).success(function (data,status) {     
            if(status==200){
             console.log(data)
             $scope.display=JSON.stringify(data);
+             $scope.loading=false;
+      console.log($scope.loading);
             }
          else{
-           $scope.loading=false;
            alert("wrong info");
          }
     }).catch(function (data) {
-      $scope.loading=false;
       alert("internal server error");
     });
     }
