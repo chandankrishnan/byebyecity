@@ -17,9 +17,10 @@
             <button class="btn-link" ng-click="show(dum.button3)" ng-bind="dum.button3"></button><br/>
         </ul>
     </div>
-    <div class="display" ng-bind="display">
+    <div class="display">
+        {{display}}
+        <center><img id="mySpinner" src="gears.gif" ng-show="loading" style="margin-top:200px"/></center>
     </div>
-    <center><img id="mySpinner" src="gears.gif" ng-show="loading" style="margin-top:200px"/></center>
 </body>
 <script>
 angular.module("myApp",[]).controller("myCtrl",function($scope,$http){
