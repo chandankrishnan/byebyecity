@@ -1,5 +1,5 @@
 /**
- * @define dependencies
+ * @define dependencies request
  */
 var request = require('request'),
     Converter = require("csvtojson").Converter;
@@ -12,16 +12,16 @@ module.exports = {
      * @param {String} --url
      * @return {JSON} --callback JSON data or err
      */
-    convertToJSON: function (url, callback) {
-        request(url, function (err, body, data) {
+    convertToJSON:function (url, callback) {
+        request(url,function (err, body, data) {
             var data = body.body;
             if (data != null) {
                 var converter = new Converter({});
-                converter.fromString(data, function (err, result) {
+                converter.fromString(data,function (err, result) {
                     callback(null, JSON.stringify(result))
                 });
             } else {
-                callback("There is no data in file", null);
+                callback("No data in the file was found. ", null);
             }
         })
     }
