@@ -1,5 +1,5 @@
 /**
- * @define dependencies
+ * @define dependencies for application
  */
 var express = require('express'),
     app = express(),
